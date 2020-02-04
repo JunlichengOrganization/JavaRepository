@@ -52,7 +52,6 @@ public class UserController {
 
         queryWrapper.eq((StringUtils.isNotBlank(loginname)), "loginname", loginname);
         List<User> list = this.userService.list(queryWrapper); //国内mybatisplus封装的方法
-        map.put("msg","list");
         map.put("list",list);
         return map;
     }
