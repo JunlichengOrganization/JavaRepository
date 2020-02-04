@@ -76,6 +76,9 @@ public class ShiroAutoConfiguration {
     @Bean(SHIRO_FILTER)
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
+
+
+
         // 设置安全管理器
         factoryBean.setSecurityManager(securityManager);
         // 设置未登陆的时要跳转的页面
@@ -97,8 +100,13 @@ public class ShiroAutoConfiguration {
                 filterChainDefinitionMap.put(authc, "authc");
             }
         }
+
+        /**
+         * 添加自定义拦截器，重写user认证方式，处理session超时问题
+         */
         Map<String, Filter> filters=new HashMap<>();
 //		filters.put("authc", new ShiroLoginFilter());
+        filters.put("authc", new SessionFilter());
         //配置过滤器
         factoryBean.setFilters(filters);
         factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
