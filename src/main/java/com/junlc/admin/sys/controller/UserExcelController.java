@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.List;
-
+import java.util.UUID;
 
 
 @RestController
@@ -212,7 +212,7 @@ public class UserExcelController {
                 rowT.createCell(1).setCellValue("asdfs~~"+i);
                 rowT.createCell(2).setCellValue("345435~~"+i);
             }
-            String fileName = "moban.xlsx";
+            String fileName = "moban"+getUUID32();
 //            downLoadExcel(fileName, response, workbook);
             buildExcelDocument(fileName,workbook,response);
 
@@ -226,15 +226,30 @@ public class UserExcelController {
         //return "download excel";
     }
 
+    public static String getUUID32(){
+        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
+    }
+
 
     //浏览器下载excel
     protected void buildExcelDocument(String filename, HSSFWorkbook workbook, HttpServletResponse response) throws Exception{
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(filename, "utf-8"));
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(filename, "utf-8")+ ".xls");
         OutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
         outputStream.flush();
         outputStream.close();
+
+        //清空response
+//        response.reset();
+//        response.setContentType("multipart/form-data");
+//        response.setHeader("Content-Disposition",
+//                "attachment; filename=" + new String("excel模板".getBytes(), "iso8859-1") + ".xls");
+//        OutputStream os = new BufferedOutputStream(response.getOutputStream());
+//        workbook.write(os);
+//        os.flush();
+//        os.close();
+//        workbook.close();
     }
 
 //    public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
