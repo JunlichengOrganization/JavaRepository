@@ -77,12 +77,13 @@ public class ShiroAutoConfiguration {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 
-
-
         // 设置安全管理器
         factoryBean.setSecurityManager(securityManager);
         // 设置未登陆的时要跳转的页面
         factoryBean.setLoginUrl(loginUrl);
+        // 未授权错误页面
+        factoryBean.setUnauthorizedUrl("/sys/noAuth");
+
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         // 设置放行的路径
         if (anonUrls != null && anonUrls.length > 0) {
@@ -105,7 +106,6 @@ public class ShiroAutoConfiguration {
          * 添加自定义拦截器，重写user认证方式，处理session超时问题
          */
         Map<String, Filter> filters=new HashMap<>();
-//		filters.put("authc", new ShiroLoginFilter());
         filters.put("authc", new SessionFilter());
         //配置过滤器
         factoryBean.setFilters(filters);

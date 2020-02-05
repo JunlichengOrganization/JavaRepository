@@ -1,5 +1,6 @@
 package com.junlc.admin.sys.controller;
 
+import com.junlc.admin.core.annotation.Log;
 import com.junlc.admin.core.shiro.ActiverUser;
 import com.junlc.admin.core.utils.WebUtils;
 import org.apache.shiro.SecurityUtils;
@@ -9,11 +10,14 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 //每个模块都有一个控制跳转的Controller类
 @Controller
 @RequestMapping("sys")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class SystemController {
 
     /**
@@ -53,13 +57,36 @@ public class SystemController {
         return "redirect:/";
     }
 
+    /**
+     * 权限不足页面
+     */
+    @GetMapping("noAuth")
+    public String noAuth() {
+        return "/system/user/no_auth";
+    }
+
     @RequestMapping("test")
     @RequiresPermissions("sys:test")
+    @Log(operationType="test操作:",operationName="SystemController测试")
     public String test() {
         //return "redirect:/";
         //return "redirect:/index.html";\
 
         return "system/user/test";
+    }
+
+    @RequestMapping("test3")
+    public String test3() {
+        Integer g= 0;
+        double j = 5/g;
+        return "system/user/test1";
+    }
+
+    @RequestMapping("test4")
+    public String test4() {
+        Integer k= 0;
+        double j = 5/k;
+        return "system/user/test1";
     }
 
     @RequestMapping("test2")
