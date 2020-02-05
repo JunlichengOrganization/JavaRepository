@@ -95,6 +95,7 @@ public class UserRealm extends AuthorizingRealm {
             percodes.add("sys:test"); //ls有访问sys/test的权限
             percodes.add("sys:test1"); //ls有访问sys/test的权限
 
+
             //放到
             activerUser.setPermissions(percodes);
 
