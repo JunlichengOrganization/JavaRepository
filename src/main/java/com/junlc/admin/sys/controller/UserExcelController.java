@@ -168,7 +168,7 @@ public class UserExcelController {
    //ajax请求excel下载 https://blog.csdn.net/zxl13735005529/article/details/87006714
     @RequestMapping(value="/excelExport")
     public void excel2007Export(HttpServletResponse response, HttpServletRequest request,Integer uid,String uname) throws Exception{
-
+        System.out.println("daochukaishi");
         Integer id= uid;
         String name = uname;
 
@@ -177,6 +177,7 @@ public class UserExcelController {
 
        // Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");  windows
         boolean isFile = resource.isFile();
+        System.out.println(isFile);
         if(!isFile){     //如果不存在返回
             return;
         }
