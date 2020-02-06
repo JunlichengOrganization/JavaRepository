@@ -165,9 +165,12 @@ public class UserExcelController {
 //        }
 //    }
 
-
+   //ajax请求excel下载 https://blog.csdn.net/zxl13735005529/article/details/87006714
     @RequestMapping(value="/excelExport")
-    public void excel2007Export(HttpServletResponse response, HttpServletRequest request) throws Exception{
+    public void excel2007Export(HttpServletResponse response, HttpServletRequest request,Integer uid,String uname) throws Exception{
+
+        Integer id= uid;
+        String name = uname;
 
         Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");
         boolean isFile = resource.isFile();

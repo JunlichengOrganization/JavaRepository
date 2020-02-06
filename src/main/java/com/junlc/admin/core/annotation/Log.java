@@ -2,9 +2,9 @@ package com.junlc.admin.core.annotation;
 
 import java.lang.annotation.*;
 
-//@Target({ElementType.PARAMETER, ElementType.METHOD})
-//@Retention(RetentionPolicy.RUNTIME)
-//@Documented
+@Target({ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface Log {
 
     /** 要执行的操作类型比如：add操作 **/

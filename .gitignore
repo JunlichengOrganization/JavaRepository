@@ -1,7 +1,7 @@
 .vs/
 .idea/
 *.iml
-
+*.log
 */target/
 target/
 *.project

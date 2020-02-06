@@ -52,7 +52,7 @@
 		      <div class="layui-input-block" style="text-align: center;">
                  登录人： <span th:text="${session.user.name}"></span>
 		      	<button type="button" class="layui-btn" onclick="megss()"><span class="layui-icon layui-icon-search"></span>查询</button>
-				  <button type="button"  shiro:hasPermission="sys:test" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-add-1"></span>test</button>
+				  <button type="button"  shiro:hasPermission="sys:test" class="layui-btn layui-btn-sm" onclick="btnexport()"><span class="layui-icon layui-icon-add-1"></span>导出</button>
 				  <button type="button"  shiro:hasPermission="sys:test2" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-add-1"></span>test1</button>
 				  <button type="button"  shiro:hasPermission="dept:create" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-add-1"></span>test2</button>
 		        </div>
@@ -343,6 +343,10 @@
 
             });
         }
+
+        function btnexport(){
+            window.location.href="/excel/excelExport?uid=3&uname=sunsea&rom="+Math.random();
+		}
 
 </script>
 

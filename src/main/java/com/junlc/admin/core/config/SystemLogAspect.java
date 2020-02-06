@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.apache.log4j.Logger;
 
@@ -85,13 +86,21 @@ public class SystemLogAspect {
         User user = activerUser.getUser();
         String ip = WebUtils.getRequest().getRemoteAddr();
         try {
+            Method targetMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
 
             String targetName = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
+
             Object[] arguments = joinPoint.getArgs();
             Class targetClass = Class.forName(targetName);
-            Method[] methods = targetClass.getMethods();
-            String operationType = "";
+            com.junlc.admin.core.annotation.Log anno = targetMethod.getAnnotation( com.junlc.admin.core.annotation.Log.class);
+            if (anno != null) {
+                // 注解上的描述
+              String kk=   anno.operationName();
+
+            }
+           // Method[] methods = targetClass.getMethods();
+            //String operationType = "";
 //            String operationName = "";
 //            for (Method method : methods) {
 //                if (method.getName().equals(methodName)) {
@@ -105,8 +114,8 @@ public class SystemLogAspect {
 //            }
             //*========控制台输出=========*//
             System.out.println("=====controller后置通知开始=====");
-            System.out.println("请求方法:" + (targetName + "." + methodName + "()") + "." + operationType);
-//            System.out.println("方法描述:" + operationName);
+            System.out.println("请求方法:" + (targetName + "." + methodName + "()"));
+            System.out.println("方法描述:" + anno.operationName());
 //            System.out.println("请求人:" + user.getName());
             System.out.println("请求IP:" + ip);
             //*========数据库日志=========*//
