@@ -172,7 +172,10 @@ public class UserExcelController {
         Integer id= uid;
         String name = uname;
 
-        Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");
+//      InputStream in = ExcelUtils.class.getClassLoader().getResourceAsStream("classpath:templates/userTemp.xlsx");
+        ClassPathResource resource = new ClassPathResource("templates/excelTemplate/student.xls"); //linux
+
+       // Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");  windows
         boolean isFile = resource.isFile();
         if(!isFile){     //如果不存在返回
             return;
