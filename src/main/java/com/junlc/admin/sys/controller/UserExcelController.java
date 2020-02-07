@@ -172,10 +172,10 @@ public class UserExcelController {
         Integer id= uid;
         String name = uname;
 
-//      InputStream in = ExcelUtils.class.getClassLoader().getResourceAsStream("classpath:templates/userTemp.xlsx");
-        ClassPathResource resource = new ClassPathResource("templates/excelTemplate/student.xls"); //linux
+        // InputStream in = ExcelUtils.class.getClassLoader().getResourceAsStream("classpath:templates/userTemp.xlsx");
+        //ClassPathResource resource = new ClassPathResource("templates/excelTemplate/student.xls"); //linux
 
-       // Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");  windows
+        Resource resource = new ClassPathResource("templates/excelTemplate/student.xls");
         boolean isFile = resource.isFile();
         System.out.println(isFile);
         if(!isFile){     //如果不存在返回
