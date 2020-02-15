@@ -75,3 +75,6 @@ server:
   servlet:
     session:
       timeout: 16000s
+      tracking-modes: cookie
+      cookie:
+              http-only: true
